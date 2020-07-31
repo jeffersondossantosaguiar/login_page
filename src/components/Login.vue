@@ -64,9 +64,9 @@ export default {
   methods: {
     checkForm: function () {
       if (!this.user) {
-        this.isActiveUser = true;
+        this.isActiveUser = true
       } else {
-        this.isActiveUser = false;
+        this.isActiveUser = false
       }
       if (!this.password) {
         this.isActivePassword = true;
