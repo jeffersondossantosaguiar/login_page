@@ -2,12 +2,22 @@
   <div class="login">
     <h1>LOGIN</h1>
     <div class="form">
-      <form>
+      <form id="login" @submit="checkForm">
         <div class="form-box">
-          <input type="text" placeholder="Email or user name" />
+          <input
+            v-model="user"
+            v-bind:class="{ required: isActiveUser }"
+            type="text"
+            placeholder="Email or user name"
+          />
         </div>
         <div class="form-box">
-          <input type="password" placeholder="Password" />
+          <input
+            v-model="password"
+            v-bind:class="{ required: isActivePassword }"
+            type="password"
+            placeholder="Password"
+          />
         </div>
         <div class="flex-container">
           <div class="toggle">
@@ -15,7 +25,7 @@
               <input class="slider" type="checkbox" checked />
               <span class="slider round"></span>
             </label>
-            <spam class="aux">Remember me</spam>
+            <span class="aux">Remember me</span>
           </div>
           <div>
             <a class="aux" href="#">Forgot Password</a>
@@ -42,7 +52,30 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: function () {
+    return {
+      user: null,
+      password: null,
+      isActiveUser: false,
+      isActivePassword: false,
+    };
+  },
+  methods: {
+    checkForm: function () {
+      if (!this.user) {
+        this.isActiveUser = true;
+      } else {
+        this.isActiveUser = false;
+      }
+      if (!this.password) {
+        this.isActivePassword = true;
+      } else {
+        this.isActivePassword = false;
+      }
+    },
+  },
+};
 </script>
 
 <style>
@@ -74,10 +107,17 @@ export default {};
   padding-left: 5px; /* borda interna esquerda */
 }
 
-.form-box input:focus, textarea:focus {
-    outline: none;
-    border:2px solid #719ECE;
-    box-shadow: 0 0 5px #719ECE;
+.form-box input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #719ece;
+  box-shadow: 0 0 5px #f4f7fa;
+}
+
+.form-box .required {
+  outline: none;
+  border: 2px solid #e93e3e;
+  box-shadow: 0 0 5px #f4f7fa;
 }
 
 .submit {
@@ -95,10 +135,10 @@ export default {};
   background-color: #d33e70;
 }
 
-.submit:focus{
-    outline: none;
-    box-shadow: 0 0 6px #719ECE;
-    background-color: #d33e70;
+.submit:focus {
+  outline: none;
+  box-shadow: 0 0 6px #719ece;
+  background-color: #d33e70;
 }
 
 .oppaco {
@@ -106,8 +146,8 @@ export default {};
   font-size: 0.8em;
 }
 
-.toggle{
-    display:inline-block;
+.toggle {
+  display: inline-block;
 }
 
 .switch {
